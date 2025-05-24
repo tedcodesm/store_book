@@ -17,10 +17,18 @@ const userSchema = new mongoose.Schema({
         required:true,
         minlength:6
     },
+    Verified:{
+        type:String,
+        default:"",
+    },
+    otp:{
+        type:String,
+        default:"",
+    },
     profileImage:{
         type:String,
         default:"",
-    }
+    },
 },
 {timestamps:true}
 );
