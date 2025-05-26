@@ -9,6 +9,7 @@ import BottomNavigator from './BottomNavigator';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import VerifyOTP from '../screens/OtpScreen';
+import ReaderScreen from '../screens/ReaderScreen';
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -22,6 +23,7 @@ const StackNavigator = () => {
     <Stack.Screen name="login" component={LoginScreen} options={{headerShown:false}} />
     <Stack.Screen name="signup" component={SignupScreen} options={{headerShown:false}} />
     <Stack.Screen name="otp" component={VerifyOTP} options={{headerShown:false}} />
+    <Stack.Screen name="read" component={ReaderScreen} options={{headerShown:false}} />
     </Stack.Navigator>
 
   </NavigationContainer>

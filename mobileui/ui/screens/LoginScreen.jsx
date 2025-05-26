@@ -17,8 +17,8 @@ import axios from "axios";
 import Ionicons from "react-native-vector-icons/Ionicons"; 
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("kaahenjoroge@gmail.com");
+  const [password, setPassword] = useState("12345678");
   const [showPassword, setShowPassword] = useState(false); 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -27,7 +27,7 @@ const LoginScreen = ({ navigation }) => {
     }
 
     try {
-      const res = await axios.post("http://192.168.100.114:3000/api/auth/login", {
+      const res = await axios.post("http://192.168.100.117:3000/api/auth/login", {
         email,
         password,
       });

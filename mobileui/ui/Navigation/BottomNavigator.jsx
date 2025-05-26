@@ -27,7 +27,7 @@ const BottomNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Library"
+        name="library"
         component={LibraryScreen}
         options={{
           tabBarLabel: "Library",
