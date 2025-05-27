@@ -10,16 +10,19 @@ import {
   ActivityIndicator,
   StatusBar,
   ScrollView,
+  Pressable,
 } from "react-native";
+import * as Speech from "expo-speech";
+
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import axios from "axios";
 
-const API_BASE = "http://192.168.100.117:3000/api/books"; // Replace with your actual IP or domain
+const API_BASE = "http://192.168.100.118:3000/api/books"; // Replace with your actual IP or domain
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [query, setQuery] = useState("pride and prejudice");
+  const [query, setQuery] = useState("Gift");
   const [reading, setReading] = useState(false);
   const [readingTitle, setReadingTitle] = useState("");
   const [bookText, setBookText] = useState("");
@@ -38,6 +41,7 @@ const HomeScreen = () => {
       setLoading(false);
     }
   };
+  const words = bookText.split(" "); // Split text into words
 
   const readBook = async (book) => {
     if (!book.textUrl) {
@@ -81,49 +85,88 @@ const HomeScreen = () => {
         <Text className="text-sm text-gray-500 mb-2">
           {item.authors || "Unknown"}
         </Text>
-       <View className="w-full mt-3 justify-between flex-row">
-         <TouchableOpacity
-          className="bg-orange-300  py-1 rounded-full mt-1 w-24"
-          onPress={async () => {
-            try {
-              await axios.post(`${API_BASE}/save`, item);
-              alert("Book saved to your library.");
-            } catch (err) {
-              alert("Failed to save book.");
-            }
-          }}
-        >
-          <Text className="text-white text-center text-sm font-md">Save Book</Text>
-        </TouchableOpacity>
-
-        {item.textUrl && (
+        <View className="w-full mt-3 justify-between flex-row">
           <TouchableOpacity
-            className="bg-orange-500  bg-opacity-50 py-1 rounded-full w-24"
-            onPress={() => readBook(item)}
+            className="bg-orange-300  py-1 rounded-full mt-1 w-24"
+            onPress={async () => {
+              try {
+                await axios.post(`${API_BASE}/save`, item);
+                alert("Book saved to your library.");
+              } catch (err) {
+                alert("Failed to save book.");
+              }
+            }}
           >
             <Text className="text-white text-center text-sm font-md">
-              Read in App
+              Save Book
             </Text>
           </TouchableOpacity>
-        )}
-       </View>
+
+          {item.textUrl && (
+            <TouchableOpacity
+              className="bg-orange-500  bg-opacity-50 py-1 rounded-full w-24"
+              onPress={() => readBook(item)}
+            >
+              <Text className="text-white text-center text-sm font-md">
+                Read in App
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
     </View>
   );
 
   // Book Reader View
   if (reading && bookText) {
+    const cleanText = bookText
+      .slice(0, 4000)
+      .replace(/[.*_,!?;:()\[\]{}'"-]/g, "");
     return (
-      <View className="flex-1 bg-white px-4 pt-6 pb-2">
+      <View className="flex-1 mt-8 bg-white px-4 pt-6 pb-2">
         <Text className="text-xl font-bold mb-2">{readingTitle}</Text>
+
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text className="text-base leading-6 text-gray-700 whitespace-pre-line">
             {bookText}
           </Text>
         </ScrollView>
+
+        {/* TTS Controls */}
+        <View className="flex-row justify-between mt-4">
+          <TouchableOpacity
+            className="bg-green-600 py-3 px-4 rounded-full flex- mr-2"
+            onPress={() => {
+              console.log("Speaking...");
+              if (bookText.length > 0) {
+                Speech.speak(cleanText, {
+                  language: "en-US",
+                  rate: 0.9,
+                });
+              } else {
+                console.log("No text to speak.");
+              }
+            }}
+          >
+            <Text className="text-white text-center font-bold">Play</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            className="bg-red-600 py-3 px-4 rounded-full flex- mr-2"
+            onPress={() => {
+              console.log("Stopping speech...");
+              Speech.stop();
+            }}
+          >
+            <Text className="text-white text-center font-bold">stop</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Close Reader Button */}
         <TouchableOpacity
           className="bg-orange-500 py-3 rounded-full mt-4"
           onPress={() => {
+            Speech.stop();
             setReading(false);
             setBookText("");
           }}
@@ -136,9 +179,12 @@ const HomeScreen = () => {
 
   return (
     <View className="flex-1 bg-slate-100">
-      <StatusBar barStyle="light-content" backgroundColor="#fb923c" />
+      <StatusBar barStyle="light-content" />
       <View className="bg-orange-400 h-12 w-full" />
-      <View className="flex-row bg-orange-400 h-14 rounded-b-xl items-center justify-center px-4">
+      <View className="flex-row bg-orange-400 h-14 rounded-b-xl items-center justify-between px-4">
+        <Pressable onPress={() => navigation.openDrawer()}>
+          <Icon name="menu" size={30} color="white" />
+        </Pressable>
         <Text className="text-xl font-extrabold text-white font-serif">
           Booknest
         </Text>
@@ -164,12 +210,18 @@ const HomeScreen = () => {
           <ActivityIndicator size="large" color="orange" />
         </View>
       ) : (
-        <FlatList
-          data={books}
-          keyExtractor={(item) => String(item.id)}
-          renderItem={renderItem}
-          contentContainerStyle={{ padding: 12 }}
-        />
+        (
+          <FlatList
+            data={books}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={renderItem}
+            contentContainerStyle={{ padding: 12 }}
+          />
+        ) || (
+          <Text className="text-black text-center font-bold">
+            Book not found
+          </Text>
+        )
       )}
     </View>
   );

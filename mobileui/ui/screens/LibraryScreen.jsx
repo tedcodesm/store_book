@@ -7,13 +7,15 @@ import {
   Image,
   ActivityIndicator,
   ScrollView,
+  StatusBar,
 } from "react-native";
 import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
+import Icons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const API_BASE = "http://192.168.100.117:3000/api/books"; // Replace with your backend URL
+const API_BASE = "http://192.168.100.118:3000/api/books"; // Replace with your backend URL
 
-const LibraryScreen = () => {
+const LibraryScreen = ({navigation}) => {
   const [savedBooks, setSavedBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [reading, setReading] = useState(false);
@@ -96,9 +98,19 @@ const LibraryScreen = () => {
   }
 
   return (
-    <View className="flex-1 bg-slate-100 px-4 pt-4">
-      <Text className="text-2xl font-bold text-orange-500 mb-4">My Library</Text>
+    <View className="flex-1 bg-slate-100 py-5 px-4 pt-4">
+            <StatusBar barStyle="light-content" backgroundColor="#fb923c" />
+      
+<View className="mb-4 mt-8 flex-row items-center justify-between w-full">
+  <TouchableOpacity
+  onPress={() => navigation.goBack()}
+  >
+    <Icons name="arrow-left" size={24} color="orange" />
 
+  </TouchableOpacity>
+        <Text className="text-2xl font-bold text-orange-500 mb-4">My Library</Text>
+
+</View>
       {loading ? (
         <ActivityIndicator size="large" />
       ) : savedBooks.length === 0 ? (

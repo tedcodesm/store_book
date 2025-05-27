@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from "../screens/HomeScreen";
 import LibraryScreen from "../screens/LibraryScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import ReaderTest from '../screens/TestScreen';
 
 const Tab = createBottomTabNavigator(); 
 
@@ -43,6 +44,16 @@ const BottomNavigator = () => {
           tabBarLabel: "Profile",
           tabBarIcon: ({ focused }) => (
             <Icon name="account" size={25} color={focused ? "orange" : "black"} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="test"
+        component={ReaderTest}
+        options={{
+          tabBarLabel: "test",
+          tabBarIcon: ({ focused }) => (
+            <Icon name="block-helper" size={25} color={focused ? "orange" : "black"} />
           ),
         }}
       />

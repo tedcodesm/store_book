@@ -1,4 +1,3 @@
-// lib/library.js
 export const library = [];
 
 // Add a book if not already saved
@@ -12,3 +11,4 @@ export function addBookToLibrary(book) {
 export function getLibrary() {
   return library;
 }
+ 
