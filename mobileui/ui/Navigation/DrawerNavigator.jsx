@@ -7,6 +7,9 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import BottomNavigator from "./BottomNavigator";
 import LibraryScreen from "../screens/LibraryScreen";
 import ReaderTest from "../screens/TestScreen";
+import BookListScreen from "../screens/BookListScreen";
+import CreateBookScreen from "../screens/CreateBookScreen";
+import MyBooksScreen from "../screens/RecomendationScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -58,6 +61,36 @@ const DrawerNavigator = () => {
       <Drawer.Screen
         name="Test"
         component={ReaderTest}
+        options={{
+          drawerLabel: "Test Reader",
+          drawerIcon: ({ color }) => (
+            <Icon className="mr-4" name="book-open" size={25} color="orange" />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="list"
+        component={BookListScreen}
+        options={{
+          drawerLabel: "list Reader",
+          drawerIcon: ({ color }) => (
+            <Icon className="mr-4" name="book-open" size={25} color="orange" />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="create"
+        component={CreateBookScreen}
+        options={{
+          drawerLabel: "create Reader",
+          drawerIcon: ({ color }) => (
+            <Icon className="mr-4" name="book-open" size={25} color="orange" />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="mine"
+        component={MyBooksScreen}
         options={{
           drawerLabel: "Test Reader",
           drawerIcon: ({ color }) => (

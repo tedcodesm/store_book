@@ -17,7 +17,7 @@ import * as Speech from "expo-speech";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import axios from "axios";
 
-const API_BASE = "http://192.168.100.118:3000/api/books"; // Replace with your actual IP or domain
+const API_BASE = "http://192.168.100.119:3000/api/books"; 
 
 const HomeScreen = ({ navigation }) => {
   const [books, setBooks] = useState([]);
@@ -193,7 +193,7 @@ const HomeScreen = ({ navigation }) => {
       <View className="flex-row p-3 bg-gray-100">
         <TextInput
           className="flex-1 border border-gray-300 bg-white rounded-full px-4"
-          placeholder="Search Project Gutenberg…"
+          placeholder="Search book "
           value={query}
           onChangeText={setQuery}
         />

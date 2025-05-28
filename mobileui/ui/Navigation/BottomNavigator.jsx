@@ -4,6 +4,7 @@ import HomeScreen from "../screens/HomeScreen";
 import LibraryScreen from "../screens/LibraryScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ReaderTest from '../screens/TestScreen';
+import CreateBookScreen from '../screens/CreateBookScreen';
 
 const Tab = createBottomTabNavigator(); 
 
@@ -37,23 +38,24 @@ const BottomNavigator = () => {
           ),
         }}
       />
+     
       <Tab.Screen
+        name="create"
+        component={CreateBookScreen}
+        options={{
+          tabBarLabel: "Create",
+          tabBarIcon: ({ focused }) => (
+            <Icon name="plus-circle-outline" size={25} color={focused ? "orange" : "black"} />
+          ),
+        }}
+      />
+       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ focused }) => (
             <Icon name="account" size={25} color={focused ? "orange" : "black"} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="test"
-        component={ReaderTest}
-        options={{
-          tabBarLabel: "test",
-          tabBarIcon: ({ focused }) => (
-            <Icon name="block-helper" size={25} color={focused ? "orange" : "black"} />
           ),
         }}
       />

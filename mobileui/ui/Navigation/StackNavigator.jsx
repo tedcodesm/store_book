@@ -11,6 +11,9 @@ import VerifyOTP from '../screens/OtpScreen';
 import ReaderScreen from '../screens/ReaderScreen';
 import ReaderTest from '../screens/TestScreen';
 import DrawerNavigator from './DrawerNavigator';
+import MyBooksScreen from '../screens/RecomendationScreen';
+import BookListScreen from '../screens/BookListScreen';
+import CreateBookScreen from '../screens/CreateBookScreen';
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -26,6 +29,9 @@ const StackNavigator = () => {
     <Stack.Screen name="otp" component={VerifyOTP} options={{headerShown:false}} />
     <Stack.Screen name="read" component={ReaderScreen} options={{headerShown:false}} />
     <Stack.Screen name="test" component={ReaderTest} options={{headerShown:false}} />
+    <Stack.Screen name="mine" component={MyBooksScreen} options={{headerShown:false}} />
+    <Stack.Screen name="list" component={BookListScreen} options={{headerShown:false}} />
+    <Stack.Screen name="create" component={CreateBookScreen} options={{headerShown:false}} />
     </Stack.Navigator>
 
   </NavigationContainer>

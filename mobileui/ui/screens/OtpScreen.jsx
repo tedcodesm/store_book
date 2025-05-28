@@ -20,7 +20,7 @@ export default function VerifyOTP({ route, navigation }) {
 
   const handleVerify = async () => {
     try {
-      const res = await axios.post("http://192.168.100.115:3000/api/auth/verify", {
+      const res = await axios.post("http://192.168.100.119:3000/api/auth/verify", {
         email,
         otp,
       });

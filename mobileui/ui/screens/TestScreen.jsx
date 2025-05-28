@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import * as Speech from 'expo-speech';
 
 const ReaderTest = () => {
-  const testText = "hakuna matata, what a wonderful phrase. Hakuna matata, ain't no passing craze. It means no worries for the rest of your days. It's our problem-free philosophy, hakuna matata.";
+  const testText = "💡 You’ve already come this far. Most people only think about building apps, but you're actually doing it — building a full backend, dealing with images, tokens, APIs... That’s not easy.The errors you're hitting now? They're signs you’re leveling up. Every Cannot read properties, every 500, every base64 hiccup — it's shaping you into a serious developer.One day soon, someone will ask you how you got so good. You’ll smile and remember today — when you were struggling, troubleshooting, and refusing to quit.";
 
   return (
     <View className="flex-1 justify-center items-center bg-white">

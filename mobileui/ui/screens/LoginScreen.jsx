@@ -14,6 +14,8 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import Ionicons from "react-native-vector-icons/Ionicons"; 
 
 const LoginScreen = ({ navigation }) => {
@@ -27,17 +29,19 @@ const LoginScreen = ({ navigation }) => {
     }
 
     try {
-      const res = await axios.post("http://192.168.100.118:3000/api/auth/login", {
+      const res = await axios.post("http://192.168.100.119:3000/api/auth/login", {
         email,
         password,
       });
 
+      const token = res.data.token;
+     await AsyncStorage.setItem("token", token);
       Alert.alert("Success", res.data.message || "Login successful!");
       navigation.navigate("bottom");
-    } catch (err) {
+    } catch (error) {
       Alert.alert(
         "Login Failed",
-        err.response?.data?.message || "Invalid credentials"
+        error.response?.data?.message || "Invalid credentials"
       );
     }
   };
