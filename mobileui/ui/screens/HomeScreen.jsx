@@ -17,7 +17,7 @@ import * as Speech from "expo-speech";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import axios from "axios";
 
-const API_BASE = "http://192.168.100.119:3000/api/books"; 
+const API_BASE = "http://192.168.100.120:3000/api/books"; 
 
 const HomeScreen = ({ navigation }) => {
   const [books, setBooks] = useState([]);
@@ -179,7 +179,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View className="flex-1 bg-slate-100">
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="light-content" backgroundColor="#fb923c" />
       <View className="bg-orange-400 h-12 w-full" />
       <View className="flex-row bg-orange-400 h-14 rounded-b-xl items-center justify-between px-4">
         <Pressable onPress={() => navigation.openDrawer()}>

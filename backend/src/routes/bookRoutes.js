@@ -9,9 +9,9 @@ router.use(express.urlencoded({ extended: true }));
 
 router.post("/create", protectRoute, async (req, res) => {
   try {
-    const { tittle, caption, rating, image } = req.body;
+    const { tittle, caption, rating, image,content } = req.body;
 
-    if (!image || !tittle || !caption || !rating) {
+    if (!image || !tittle || !caption || !rating || !content) {
       return res.status(400).json({ mesage: "please provide all fields" });
     }
 
@@ -22,6 +22,7 @@ router.post("/create", protectRoute, async (req, res) => {
     const newBook = new Book({
       tittle,
       caption,
+      content,
       rating,
       image: imageUrl,
       user: req.user._id,
@@ -113,7 +114,23 @@ router.get("/user", protectRoute, async (req, res) => {
         console.log("Error in getting recommended books", error);
         res.status(500).json({ message: "Internal server error" });
     }
-})
+});
+// Get a single book by ID
+router.get("/content/:id", protectRoute, async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id).populate("user", "username profileImage");
+
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    res.status(200).json(book);
+  } catch (error) {
+    console.log("Error fetching book by ID", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 
 
 export default router;

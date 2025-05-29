@@ -13,16 +13,16 @@ import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
 import Icons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const API_BASE = "http://192.168.100.119:3000/api/books"; // Replace with your backend URL
+const API_BASE = "http://192.168.100.120:3000/api/books"; // Replace with your backend URL
 
-const LibraryScreen = ({navigation}) => {
+const LibraryScreen = ({ navigation }) => {
   const [savedBooks, setSavedBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [reading, setReading] = useState(false);
   const [readingTitle, setReadingTitle] = useState(null);
   const [bookText, setBookText] = useState(null);
 
-   const isFocused = useIsFocused();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     if (isFocused) fetchLibrary();
@@ -67,7 +67,9 @@ const LibraryScreen = ({navigation}) => {
       />
       <View className="flex-1">
         <Text className="text-base font-bold">{item.title}</Text>
-        <Text className="text-sm text-gray-500">{item.authors || "Unknown"}</Text>
+        <Text className="text-sm text-gray-500">
+          {item.authors || "Unknown"}
+        </Text>
         {item.textUrl && (
           <TouchableOpacity onPress={() => readBook(item)}>
             <Text className="text-blue-500 mt-1">Read In App</Text>
@@ -82,7 +84,9 @@ const LibraryScreen = ({navigation}) => {
       <View className="flex-1 bg-white p-4">
         <Text className="text-lg font-bold mb-3">{readingTitle}</Text>
         <ScrollView>
-          <Text className="text-base leading-6 whitespace-pre-wrap">{bookText}</Text>
+          <Text className="text-base leading-6 whitespace-pre-wrap">
+            {bookText}
+          </Text>
         </ScrollView>
         <TouchableOpacity
           className="bg-orange-500 mt-4 py-3 rounded-full"
@@ -99,22 +103,22 @@ const LibraryScreen = ({navigation}) => {
 
   return (
     <View className="flex-1 bg-slate-100 py-5 px-4 pt-4">
-            <StatusBar barStyle="light-content" backgroundColor="#fb923c" />
-      
-<View className="mb-4 mt-8 flex-row items-center justify-between w-full">
-  <TouchableOpacity
-  onPress={() => navigation.goBack()}
-  >
-    <Icons name="arrow-left" size={24} color="orange" />
+      <StatusBar barStyle="light-content" backgroundColor="#fb923c" />
 
-  </TouchableOpacity>
-        <Text className="text-2xl font-bold text-orange-500 mb-4">My Library</Text>
-
-</View>
+      <View className="mb-4 mt-8 flex-row items-center justify-between w-full">
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icons name="arrow-left" size={24} color="orange" />
+        </TouchableOpacity>
+        <Text className="text-2xl font-bold text-orange-500 mb-4">
+          My Library
+        </Text>
+      </View>
       {loading ? (
         <ActivityIndicator size="large" />
       ) : savedBooks.length === 0 ? (
-        <Text className="text-center text-gray-500 mt-20">No books saved yet.</Text>
+        <Text className="text-center text-gray-500 mt-20">
+          No books saved yet.
+        </Text>
       ) : (
         <FlatList
           data={savedBooks}

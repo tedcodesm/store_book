@@ -59,45 +59,28 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
+        name="list"
+        component={BookListScreen}
+        options={{
+          drawerLabel: "View Books",
+          drawerIcon: ({ color }) => (
+            <Icon className="mr-4" name="book-open" size={25} color="orange" />
+          ),
+        }}
+      />
+      <Drawer.Screen
         name="Test"
         component={ReaderTest}
         options={{
           drawerLabel: "Test Reader",
           drawerIcon: ({ color }) => (
-            <Icon className="mr-4" name="book-open" size={25} color="orange" />
+            <Icon className="mr-4" name="alert" size={25} color="red" />
           ),
         }}
       />
-      <Drawer.Screen
-        name="list"
-        component={BookListScreen}
-        options={{
-          drawerLabel: "list Reader",
-          drawerIcon: ({ color }) => (
-            <Icon className="mr-4" name="book-open" size={25} color="orange" />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="create"
-        component={CreateBookScreen}
-        options={{
-          drawerLabel: "create Reader",
-          drawerIcon: ({ color }) => (
-            <Icon className="mr-4" name="book-open" size={25} color="orange" />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="mine"
-        component={MyBooksScreen}
-        options={{
-          drawerLabel: "Test Reader",
-          drawerIcon: ({ color }) => (
-            <Icon className="mr-4" name="book-open" size={25} color="orange" />
-          ),
-        }}
-      />
+      
+      
+      
     </Drawer.Navigator>
   );
 };

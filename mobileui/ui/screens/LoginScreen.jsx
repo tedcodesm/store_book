@@ -29,7 +29,7 @@ const LoginScreen = ({ navigation }) => {
     }
 
     try {
-      const res = await axios.post("http://192.168.100.119:3000/api/auth/login", {
+      const res = await axios.post("http://192.168.100.120:3000/api/auth/login", {
         email,
         password,
       });
