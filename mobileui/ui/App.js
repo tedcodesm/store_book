@@ -11,7 +11,7 @@ import VerifyOTP from './screens/OtpScreen';
 
 export default function App() {
   return (
-   <  StackNavigator/>
+   <StackNavigator/>
   );
 }
 

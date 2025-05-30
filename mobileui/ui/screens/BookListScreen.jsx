@@ -107,12 +107,13 @@ export default function BookListScreen({ navigation }) {
             </View>
 
             <TouchableOpacity
-  onPress={() => navigation.navigate("content", { bookId: item._id })}
-  className="justify-end bg-orange-400 rounded-full items-center h-8 px-3"
->
-  <Text className="text-lg font-bold font-serif">View</Text>
-</TouchableOpacity>
-
+              onPress={() =>
+                navigation.navigate("content", { bookId: item._id })
+              }
+              className="justify-end bg-orange-400 rounded-full items-center h-8 px-3"
+            >
+              <Text className="text-lg font-bold font-serif">View</Text>
+            </TouchableOpacity>
           </View>
         )}
         onEndReached={() => {
