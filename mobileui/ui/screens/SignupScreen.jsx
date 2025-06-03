@@ -19,9 +19,9 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 const SignupScreen = () => {
   const navigation = useNavigation();
-  const [username, setUsername] = useState("Ted");
-  const [email, setEmail] = useState("kaahenjoroge@gmail.com");
-  const [password, setPassword] = useState("12345678");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); 
 
   const handleSignup = async () => {
@@ -31,7 +31,7 @@ const SignupScreen = () => {
     }
 
     try {
-      const res = await axios.post("http://192.168.100.119:3000/api/auth/register", {
+      const res = await axios.post("http://192.168.100.123:3000/api/auth/register", {
         username,
         email,
         password,
@@ -57,7 +57,7 @@ const SignupScreen = () => {
           <View className="flex-1 items-center bg-lime-500 py-8 justify-center">
             <View className="h-56">
               <Image
-                className="w-40 h-60 object-cover"
+                className="w-40 h-60 z-[5] object-cover"
                 resizeMode="contain"
                 source={require("../assets/sign.png")}
               />

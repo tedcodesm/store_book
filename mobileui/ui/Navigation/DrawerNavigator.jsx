@@ -10,6 +10,8 @@ import ReaderTest from "../screens/TestScreen";
 import BookListScreen from "../screens/BookListScreen";
 import CreateBookScreen from "../screens/CreateBookScreen";
 import MyBooksScreen from "../screens/RecomendationScreen";
+import InteligentScreen from "../screens/InteligentScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -19,12 +21,8 @@ const DrawerNavigator = () => {
       drawerContent={(props) => {
         return (
           <SafeAreaView>
-            <View className="w-full justify-center rounded-br-3xl bg-orange-400 items-center space-y-3 h-80 mb-5">
-              <Image
-                className="w-24 h-24 rounded-full"
-                source={require("../assets/woman.jpeg")}
-                resizeMode="contain"
-              />
+            <View className="w-full justify-center rounded-br-3xl bg-orange-400 items-center space-y-3 h-40 mb-5">
+              
             </View>
             <DrawerItemList {...props} />
           </SafeAreaView>
@@ -49,16 +47,6 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="Library"
-        component={LibraryScreen}
-        options={{
-          drawerLabel: "Library",
-          drawerIcon: ({ color }) => (
-            <Icon  className="mr-4" name="book" size={25} color="orange" />
-          ),
-        }}
-      />
-      <Drawer.Screen
         name="list"
         component={BookListScreen}
         options={{
@@ -69,15 +57,46 @@ const DrawerNavigator = () => {
         }}
       />
       <Drawer.Screen
-        name="Test"
-        component={ReaderTest}
+        name="int"
+        component={InteligentScreen}
         options={{
-          drawerLabel: "Test Reader",
+          drawerLabel: "Ai summary",
           drawerIcon: ({ color }) => (
-            <Icon className="mr-4" name="alert" size={25} color="red" />
+            <Icon className="mr-4" name="chat" size={25} color="orange" />
           ),
         }}
       />
+      <Drawer.Screen
+        name="create"
+        component={CreateBookScreen}
+        options={{
+          drawerLabel: "Create Book",
+          drawerIcon: ({ color }) => (
+            <Icon className="mr-4" name="book-plus" size={25} color="orange" />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="library"
+        component={LibraryScreen}
+        options={{
+          drawerLabel: "My Library",
+          drawerIcon: ({ color }) => (
+            <Icon className="mr-4" name="library" size={25} color="orange" />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="profile"
+        component={ProfileScreen}
+        options={{
+          drawerLabel: "Profile",
+          drawerIcon: ({ color }) => (
+            <Icon className="mr-4" name="account" size={25} color="orange" />
+          ),
+        }}
+      />
+    
       
       
       

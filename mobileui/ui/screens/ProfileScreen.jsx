@@ -30,7 +30,7 @@ export default function ProfileScreen({navigation}) {
     <View className="flex-1 bg-white">
       <StatusBar barStyle="light-content" backgroundColor="#fb923c" />
 
-      <View className="mb-4 mt-8 px-4 bg-orange-400 flex-row items-center py-4 justify-between w-full">
+      <View className="mb-4 px-4 bg-orange-400 flex-row items-center py-4 justify-between w-full">
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icons name="arrow-left" size={24} color="white" />
         </TouchableOpacity>

@@ -17,7 +17,7 @@ import * as Speech from "expo-speech";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import axios from "axios";
 
-const API_BASE = "http://192.168.100.121:3000/api/books"; 
+const API_BASE = "http://192.168.100.123:3000/api/books"; 
 
 const HomeScreen = ({ navigation }) => {
   const [books, setBooks] = useState([]);

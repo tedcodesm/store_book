@@ -13,7 +13,7 @@ import axios from "axios";
 import { useIsFocused } from "@react-navigation/native";
 import Icons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const API_BASE = "http://192.168.100.121:3000/api/books"; // Replace with your backend URL
+const API_BASE = "http://192.168.100.123:3000/api/books"; // Replace with your backend URL
 
 const LibraryScreen = ({ navigation }) => {
   const [savedBooks, setSavedBooks] = useState([]);
@@ -105,7 +105,7 @@ const LibraryScreen = ({ navigation }) => {
     <View className="flex-1 bg-slate-100 py-5 px-4 pt-4">
       <StatusBar barStyle="light-content" backgroundColor="#fb923c" />
 
-      <View className="mb-4 mt-8 flex-row items-center justify-between w-full">
+      <View className="mb-4 flex-row  items-center justify-between w-full">
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icons name="arrow-left" size={24} color="orange" />
         </TouchableOpacity>
@@ -114,7 +114,7 @@ const LibraryScreen = ({ navigation }) => {
         </Text>
       </View>
       {loading ? (
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color="orange"/>
       ) : savedBooks.length === 0 ? (
         <Text className="text-center text-gray-500 mt-20">
           No books saved yet.

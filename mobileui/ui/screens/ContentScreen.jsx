@@ -59,13 +59,13 @@ const ContentScreen = () => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="arrow-left" size={28} color="orange" />
         </TouchableOpacity>
-        <Text className="text-xl font-bold text-orange-500">Book Detail</Text>
+        <Text className="text-xl font-bold text-orange-500">{book.tittle}</Text>
         <View style={{ width: 28 }} />
       </View>
 
     
 
-      <Text className="text-2xl font-bold mb-1">{book.tittle}</Text>
+      <Text className="text-2xl font-bold mb-1"></Text>
       <Text className="text-sm text-gray-500 italic">
         Posted by: {book.user?.username}
       </Text>

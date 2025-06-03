@@ -15,6 +15,7 @@ import MyBooksScreen from '../screens/RecomendationScreen';
 import BookListScreen from '../screens/BookListScreen';
 import CreateBookScreen from '../screens/CreateBookScreen';
 import ContentScreen from '../screens/ContentScreen';
+import InteligentScreen from '../screens/InteligentScreen';
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -34,6 +35,7 @@ const StackNavigator = () => {
     <Stack.Screen name="list" component={BookListScreen} options={{headerShown:false}} />
     <Stack.Screen name="create" component={CreateBookScreen} options={{headerShown:false}} />
     <Stack.Screen name="content" component={ContentScreen} options={{headerShown:false}} />
+    <Stack.Screen name="int" component={InteligentScreen} options={{headerShown:false}} />
     </Stack.Navigator>
 
   </NavigationContainer>

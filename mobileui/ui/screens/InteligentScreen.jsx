@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { KeyboardAvoidingView, TextInput, Text, View, Platform, TouchableOpacity, FlatList } from "react-native";
+import Icons from "react-native-vector-icons/MaterialCommunityIcons";
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({ apiKey: "" });
 
 const chatMessages = [
-  { sender: 'you', message: 'Hello Gemini' },
-  { sender: 'AI', message: 'My name is not Gemini, I am just AI' }
+  { sender: 'you', message: 'Hello, how are you?' },
+  { sender: 'ML', message: "Hello! How can I assist you today?" },
 ];
 
 function ChatMessage({ item }) {
@@ -14,7 +15,7 @@ function ChatMessage({ item }) {
 
   return (
     <View
-      className={`max-w-[70%] rounded-xl px-4 py-2 my-1 ${isYou ? "self-end bg-orange-500" : "self-start bg-gray-300"}`}
+      className={`max-w-[70%] rounded-xl px-4 py-2 my-1 ${isYou ? "self-end bg-orange-500" : "self-start bg-orange-200"}`}
     >
       <Text className="text-xs font-semibold text-gray-700 mb-1">{item.sender}</Text>
       <Text className={`text-base ${isYou ? "text-white" : "text-black"}`}>{item.message}</Text>
@@ -22,46 +23,48 @@ function ChatMessage({ item }) {
   );
 }
 
-export default function InteligentScreen() {
+export default function InteligentScreen({ navigation }) {
   const [messages, setMessages] = useState(chatMessages);
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const makeAiInference = async () => {
-    try {
-      const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash-lite",
-        contents: inputText.trim() 
-      });
+const makeAiInference = async () => {
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash-lite",
+      contents: inputText.trim()
+    });
 
-      setLoading(false);
+    setLoading(false);
 
-      const text = response.text;
-      const aiResponse = {
-        sender: 'AI',
-        message: text,
-      };
-      setMessages([aiResponse, ...messages]);
-    } catch (error) {
-      console.error("AI error:", error);
-      setLoading(false);
-    }
-  };
-
-  const sendPrompt = () => {
-    const trimmed = inputText.trim();
-    if (trimmed.length === 0) return;
-
-    const newMessage = {
-      sender: 'you',
-      message: trimmed,
+    const text = response.text;
+    const aiResponse = {
+      sender: 'ML',
+      message: text,
     };
+    setMessages(prev => [aiResponse, ...prev]);
+  } catch (error) {
+    console.error("AI error:", error);
+    setLoading(false);
+  }
+};
 
-    setMessages([newMessage, ...messages]);
-    setInputText('');
-    setLoading(true);
-    makeAiInference();
+const sendPrompt = () => {
+  const trimmed = inputText.trim();
+  if (trimmed.length === 0) return;
+
+  const newMessage = {
+    sender: 'you',
+    message: trimmed,
   };
+
+  setMessages(prev => [newMessage, ...prev]);
+  setInputText('');
+  setLoading(true);
+  makeAiInference();
+};
+
+
 
   return (
     <KeyboardAvoidingView
@@ -69,6 +72,14 @@ export default function InteligentScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={80}
     >
+      <View className="mb-4 px-4 bg-orange-400 rounded-b-xl flex-row items-center py-4 justify-between w-full">
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Icons name="arrow-left" size={24} color="white" />
+              </TouchableOpacity>
+              <Text className="text-2xl font-bold text-white mb-4">
+                Chat Screen
+              </Text>
+            </View>
       <FlatList
         data={messages}
         renderItem={ChatMessage}
